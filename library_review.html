@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>補助資料 | Pandas/NumPyライブラリの基礎</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Roboto:wght@400;700;900&family=Fira+Code&display=swap');
+        :root {
+            --primary-color: #0d47a1;
+            --secondary-color: #1976d2;
+            --accent-color: #ff6f00;
+            --text-color: #333;
+            --bg-color: #f5f7fa;
+            --content-bg: #ffffff;
+            --code-bg: #2d2d2d;
+            --code-font: 'Fira Code', monospace;
+        }
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            margin: 0;
+        }
+        .header {
+            background: linear-gradient(45deg, #2e7d32, #4caf50);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: var(--content-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        h2 {
+            font-family: 'Roboto', sans-serif;
+            color: #2e7d32;
+            border-bottom: 3px solid #66bb6a;
+            padding-bottom: 0.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        h3 {
+            font-family: 'Roboto', sans-serif;
+            color: #388e3c;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        pre {
+            background: var(--code-bg);
+            color: #f8f8f2;
+            padding: 1em;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: var(--code-font);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        code { font-family: var(--code-font); }
+        .note {
+            background-color: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 1em;
+            margin: 1.5em 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <header class='header'>
+        <h1>Pandas/NumPyライブラリの基礎</h1>
+        <p>データ分析のためのPythonライブラリ超入門</p>
+    </header>
+
+    <div class='container'>
+        <h2>はじめに</h2>
+        <p>Pythonでデータ分析を行う際、<strong>NumPy</strong>と<strong>Pandas</strong>は必須のライブラリです。この資料では、主成分分析の演習で使う基本的な操作に絞って紹介します。</p>
+
+        <h2>NumPy: 高速な数値計算の達人</h2>
+        <p>NumPyは、ベクトルや行列といった数値の集まりを効率的に計算するためのライブラリです。scikit-learnなど多くのライブラリの内部で使われています。</p>
+        
+        <h3>配列の作成</h3>
+        <p>`np.array()` を使ってNumPy配列を作成します。</p>
+        <pre><code>import numpy as np
+
+a = np.array([1, 2, 3, 4])
+print(a)
+# 出力: [1 2 3 4]
+
+print(a.shape)
+# 出力: (4,)</code></pre>
+
+        <h2>Pandas: 表形式データを自在に操る</h2>
+        <p>Pandasは、Excelのシートのような表形式のデータを扱うためのライブラリです。データフレーム(DataFrame)という形式でデータを保持し、読み込み、加工、集計などを簡単に行えます。</p>
+
+        <h3>CSVファイルの読み込み</h3>
+        <p>演習では `pd.read_csv()` を使ってデータファイルを読み込みます。</p>
+        <pre><code>import pandas as pd
+
+# 'sample_data.csv'という名前のファイルを読み込む
+df = pd.read_csv('sample_data.csv')</code></pre>
+        
+        <h3>データの確認</h3>
+        <p>読み込んだデータがどのようなものか確認する基本操作です。</p>
+        <pre><code># 最初の5行を表示
+df.head()
+
+# データ型や欠損値の有無を確認
+df.info()
+
+# 基本的な統計量（平均、標準偏差など）を表示
+df.describe()</code></pre>
+        <div class='note'>
+            <strong>`.head()` は超便利！</strong><br>
+            大きなデータを扱う際、まず `.head()` でデータの形式（列名や値の入り方）をざっと確認するのが定石です。
+        </div>
+
+        <h3>データの選択と操作</h3>
+        <p>データフレームから特定の列を選んだり、不要な列を削除したりします。</p>
+        <pre><code># 'quality'列だけを選択
+quality_column = df['quality']
+print(quality_column.head())
+
+# 複数の列を選択
+selected_columns = df[['quality', 'price']]
+print(selected_columns.head())
+
+# 'customer_id'列を削除 (axis=1は列を意味する)
+df_dropped = df.drop('customer_id', axis=1)
+print(df_dropped.head())</code></pre>
+        
+        <h2>Matplotlib & Seaborn: データの可視化</h2>
+        <p>演習では、分析結果をグラフで分かりやすく表現するためにこれらのライブラリも使用します。Pandasと非常に相性が良いです。</p>
+        
+        <h3>基本的な使い方</h3>
+        <p>Seabornを使うと、少ないコードで美しいグラフが描けます。</p>
+        <pre><code>import matplotlib.pyplot as plt
+import seaborn as sns
+
+# 例: 主成分スコアの散布図
+# score_dfはPC1とPC2の列を持つデータフレームと仮定
+sns.scatterplot(x='PC1', y='PC2', data=score_df)
+plt.title('主成分スコアの散布図')
+plt.show()
+
+# 例: 主成分負荷量のヒートマップ
+# loadings_dfは各主成分の負荷量を持つデータフレームと仮定
+sns.heatmap(loadings_df, annot=True, cmap='coolwarm')
+plt.title('主成分負荷量')
+plt.show()</code></pre>
+        <p>これらの基本的な操作を覚えておけば、講義の演習はスムーズに進められるはずです！</p>
+    </div>
+</body>
+</html>

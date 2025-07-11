@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>補助資料 | Google Colabの基本操作</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Roboto:wght@400;700;900&display=swap');
+        :root {
+            --primary-color: #0d47a1;
+            --secondary-color: #1976d2;
+            --accent-color: #ff6f00;
+            --text-color: #333;
+            --bg-color: #f5f7fa;
+            --content-bg: #ffffff;
+        }
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            margin: 0;
+        }
+        .header {
+            background: linear-gradient(45deg, #f57c00, #ff9800);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: var(--content-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        h2 {
+            font-family: 'Roboto', sans-serif;
+            color: #f57c00;
+            border-bottom: 3px solid #ffb74d;
+            padding-bottom: 0.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        h3 {
+            font-family: 'Roboto', sans-serif;
+            color: #fb8c00;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        p { margin-bottom: 1rem; }
+        .step {
+            counter-increment: step-counter;
+            margin-bottom: 2rem;
+        }
+        .step h3::before {
+            content: 'Step ' counter(step-counter) ': ';
+            font-weight: 900;
+        }
+        img {
+            max-width: 100%;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-top: 1rem;
+        }
+        .warning {
+            background-color: #fff3e0;
+            border-left: 5px solid #ff9800;
+            padding: 1em;
+            margin: 1.5em 0;
+            border-radius: 4px;
+        }
+        a.button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.6em 1.5em;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a.button:hover {
+            background-color: #e65100;
+        }
+    </style>
+</head>
+<body style='counter-reset: step-counter;'>
+
+    <header class='header'>
+        <h1>Google Colab 基本操作ガイド</h1>
+        <p>環境構築不要でPythonを始めよう！</p>
+    </header>
+
+    <div class='container'>
+        <h2>Google Colab (Colab) とは？</h2>
+        <p>Googleが提供する、ブラウザ上でPythonコードを実行できる無料のサービスです。自分のPCに何もインストールすることなく、すぐにデータ分析を始めることができます。</p>
+        <ul>
+            <li><strong>無料</strong>で利用可能（Googleアカウントが必要です）</li>
+            <li>面倒な<strong>環境構築が不要</strong></li>
+            <li>Pandasやscikit-learnなど、主要なライブラリは<strong>最初からインストール済み</strong></li>
+        </ul>
+
+        <div class='step'>
+            <h3>Colabへのアクセスと新規作成</h3>
+            <p>まず、以下のボタンからGoogle Colabのサイトにアクセスします。</p>
+            <p><a href='https://colab.research.google.com/' target='_blank' class='button'>Google Colabを開く</a></p>
+            <p>アクセスしたら、ポップアップウィンドウが表示されるので、右下の「ノートブックを新規作成」をクリックします。（表示されない場合は、メニューの「ファイル」→「ノートブックを新規作成」を選択）</p>
+            <!--<img src='https://i.imgur.com/k6lP0W3.png' alt='ノートブックを新規作成'>-->
+        </div>
+
+        <div class='step'>
+            <h3>基本的な使い方（コードの実行）</h3>
+            <p>Colabは「セル」という単位でコードや文章を管理します。コードを書き、実行するのが基本操作です。</p>
+            <ol>
+                <li><strong>コードセル</strong>にPythonコードを入力します。</li>
+                <li>セルの左側にある<strong>再生ボタン (▶)</strong> をクリックするか、キーボードで <strong>Shift + Enter</strong> を押すと、コードが実行されます。</li>
+                <li>実行結果はセルのすぐ下に表示されます。</li>
+            </ol>
+            <!--<img src='https://i.imgur.com/Fw5Qf9e.png' alt='コードの実行方法'>-->
+        </div>
+        
+        <div class='step'>
+            <h3>演習データのアップロード</h3>
+            <p>演習で使用する `sample_data.csv` をColabにアップロードします。</p>
+            <ol>
+                <li>画面左側にある<strong>フォルダのアイコン</strong>をクリックして、ファイルパネルを開きます。</li>
+                <li><strong>「セッション ストレージにアップロード」アイコン</strong>（ファイルの絵に上矢印）をクリックします。</li>
+                <li>ファイル選択画面が開くので、ダウンロードした `sample_data.csv` を選択します。</li>
+            </ol>
+            <!--<img src='https://i.imgur.com/g8vKqHh.png' alt='ファイルのアップロード手順'>-->
+            <p>アップロードが完了すると、ファイル一覧に `sample_data.csv` が表示されます。これで、`pd.read_csv('sample_data.csv')` のようにコードからファイルを読み込めるようになります。</p>
+            <div class='warning'>
+                <strong>注意！</strong><br>
+                この方法でアップロードしたファイルは、Colabの接続が切れる（例：ブラウザを閉じて1時間以上経つなど）と<strong>消えてしまいます。</strong>毎回演習を始める際に、再度アップロードが必要です。
+            </div>
+        </div>
+        <p>以上の基本操作で、講義の演習はすべて行えます。ぜひ活用してください！</p>
+    </div>
+
+</body>
+</html>
