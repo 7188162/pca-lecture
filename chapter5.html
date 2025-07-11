@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>第5章：まとめ</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Roboto:wght@400;700;900&display=swap');
+:root {
+--primary-color: #0d47a1;
+--secondary-color: #1976d2;
+--accent-color: #ff6f00;
+--text-color: #333;
+--bg-color: #f5f7fa;
+--slide-bg: #ffffff;
+--header-font: 'Roboto', 'Noto Sans JP', sans-serif;
+--body-font: 'Noto Sans JP', sans-serif;
+}
+body {
+font-family: var(--body-font);
+background-color: var(--bg-color);
+color: var(--text-color);
+margin: 0;
+padding: 2em;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+.slide-container {
+width: 100%;
+max-width: 960px;
+aspect-ratio: 16 / 9;
+background: var(--slide-bg);
+border-radius: 8px;
+box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+margin-bottom: 2em;
+display: flex;
+flex-direction: column;
+position: relative;
+overflow: hidden;
+}
+.slide-header {
+padding: 0.5em 1.5em;
+background-color: var(--primary-color);
+color: white;
+font-family: var(--header-font);
+font-weight: 700;
+font-size: 1.2rem;
+text-align: center;
+}
+.slide-content {
+flex-grow: 1;
+padding: 2em 3em;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+.slide-footer {
+position: absolute;
+bottom: 0;
+left: 0;
+right: 0;
+padding: 0.5em 1.5em;
+font-size: 0.8rem;
+color: #777;
+text-align: right;
+}
+h1, h2, h3 {
+font-family: var(--header-font);
+font-weight: 900;
+color: var(--primary-color);
+margin: 0;
+}
+h1 { font-size: 3rem; text-align: center; }
+h2 { font-size: 2.2rem; }
+h3 { font-size: 1.3rem; margin-bottom: 0.5em; color: var(--secondary-color); }
+p { font-size: 1.1rem; line-height: 1.8; }
+.subtitle { color: var(--secondary-color); font-size: 1.5rem; font-weight: 400; margin-top: 0.5em; text-align: center; }
+.flex-container { display: flex; justify-content: space-around; align-items: stretch; width: 100%; gap: 2em; }
+.flex-item { flex: 1; text-align: left; }
+.highlight { color: var(--accent-color); font-weight: bold; }
+.caution-list { list-style: none; padding-left: 0; width: 90%; }
+.caution-list li {
+background: #fffbe6;
+border-left: 5px solid #f57f17;
+padding: 0.8em 1.2em;
+margin-bottom: 1em;
+font-size: 1rem;
+}
+.next-step-box {
+border: 1px solid #ddd;
+border-radius: 8px;
+padding: 1.5em;
+text-align: center;
+}
+.next-step-box ul { list-style-position: inside; text-align: left; font-size: 1rem; padding-left:0; }
+.final-slide-content {
+background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+color: white;
+text-align: center;
+}
+.final-slide-content h1, .final-slide-content p {
+color: white;
+}
+</style>
+</head>
+<body>
+<!-- Slide 1: Chapter Title -->
+<div class='slide-container'>
+    <div class='slide-content'>
+        <p class='subtitle'>第5章 まとめ</p>
+        <h1>学びの総括と次の一歩へ</h1>
+    </div>
+    <div class='slide-footer'>1 / 5</div>
+</div>
+
+<!-- Slide 2: Key Takeaways -->
+<div class='slide-container'>
+    <div class='slide-header'>5. まとめ</div>
+    <div class='slide-content'>
+        <h2 style='width:100%; text-align:center; margin-bottom: 1em;'>本講義の要点整理</h2>
+        <svg viewBox='0 0 500 150' width='100%'>
+            <defs><marker id='arrowhead' markerWidth='10' markerHeight='7' refX='0' refY='3.5' orient='auto'><polygon points='0 0, 10 3.5, 0 7' fill='#333'/></marker></defs>
+            <!-- Box 1 -->
+            <g>
+                <rect x='10' y='50' width='100' height='60' fill='#fce4ec' stroke='#c2185b' rx='5' />
+                <text x='60' y='75' font-size='12' text-anchor='middle'>課題</text>
+                <text x='60' y='95' font-size='10' text-anchor='middle'>多次元データ</text>
+            </g>
+            <path d='M115,80 L145,80' stroke-width='2' stroke='#333' marker-end='url(#arrowhead)'/>
+            <!-- Box 2 -->
+            <g>
+                <rect x='150' y='50' width='100' height='60' fill='#e3f2fd' stroke='#1976d2' rx='5' />
+                <text x='200' y='75' font-size='12' text-anchor='middle'>PCAの核心</text>
+                <text x='200' y='95' font-size='10' text-anchor='middle'>分散最大化/軸回転</text>
+            </g>
+            <path d='M255,80 L285,80' stroke-width='2' stroke='#333' marker-end='url(#arrowhead)'/>
+            <!-- Box 3 -->
+            <g>
+                <rect x='290' y='50' width='100' height='60' fill='#e8f5e9' stroke='#388e3c' rx='5' />
+                <text x='340' y='70' font-size='12' text-anchor='middle'>アウトプット</text>
+                <text x='340' y='87' font-size='10' text-anchor='middle'>寄与率, 負荷量</text>
+                <text x='340' y='102' font-size='10' text-anchor='middle'>スコア</text>
+            </g>
+            <path d='M395,80 L425,80' stroke-width='2' stroke='#333' marker-end='url(#arrowhead)'/>
+            <!-- Box 4 -->
+            <g>
+                <rect x='430' y='50' width='60' height='60' fill='#fff3e0' stroke='#ff6f00' rx='5' />
+                <text x='460' y='85' font-size='12' text-anchor='middle'>活用</text>
+            </g>
+        </svg>
+        <p style='margin-top: 1em;'>主成分分析は、<strong class='highlight'>複雑な多次元データ</strong>から<strong class='highlight'>本質的な軸</strong>を見つけ出し、<strong class='highlight'>解釈・活用</strong>するための強力な手法です。</p>
+    </div>
+    <div class='slide-footer'>2 / 5</div>
+</div>
+
+<!-- Slide 3: Limitations and Cautions -->
+<div class='slide-container'>
+    <div class='slide-header'>5. まとめ</div>
+    <div class='slide-content'>
+        <h2 style='width:100%; text-align:center; margin-bottom: 1em;'>主成分分析の限界と注意点</h2>
+        <ul class='caution-list'>
+            <li><strong>線形性の仮定：</strong> 変数間の関係が<strong class='highlight'>非線形（U字など）だと、うまく要約できません。</strong></li>
+            <li><strong>解釈の難しさ：</strong> 主成分が<strong class='highlight'>必ずしも直感的に解釈できるとは限りません。</strong>特に第3主成分以降は注意が必要です。</li>
+            <li><strong>外れ値の影響：</strong> 分散をベースにするため、<strong class='highlight'>外れ値に分析結果が大きく引っ張られます。</strong>事前のデータ確認が重要です。</li>
+            <li><strong>情報の損失：</strong> 次元削減する以上、<strong class='highlight'>一部の情報は失われます。</strong>累積寄与率を必ず確認しましょう。</li>
+        </ul>
+    </div>
+    <div class='slide-footer'>3 / 5</div>
+</div>
+
+<!-- Slide 4: Next Steps -->
+<div class='slide-container'>
+    <div class='slide-header'>5. まとめ</div>
+    <div class='slide-content'>
+        <h2 style='width:100%; text-align:center; margin-bottom: 1em;'>次のステップへ - 学習を深めるために</h2>
+        <div class='flex-container'>
+            <div class='flex-item next-step-box'>
+                <h3>① 理論を深める</h3>
+                <ul>
+                    <li>統計学入門（書籍）</li>
+                    <li>多変量解析（書籍）</li>
+                    <li>カーネル法など発展手法</li>
+                </ul>
+            </div>
+            <div class='flex-item next-step-box'>
+                <h3>② 実装を極める</h3>
+                <ul>
+                    <li>Kaggleのコンペに参加</li>
+                    <li>Scikit-learn公式ドキュメント</li>
+                    <li>自分のデータで試してみる</li>
+                </ul>
+            </div>
+            <div class='flex-item next-step-box'>
+                <h3>③ 他の手法を学ぶ</h3>
+                <ul>
+                    <li>因子分析 (FA)</li>
+                    <li>独立成分分析 (ICA)</li>
+                    <li>t-SNE, UMAP</li>
+                </ul>
+            </div>
+        </div>
+         <p style='text-align: center; margin-top: 2em;'>目的によって最適な手法は異なります。道具箱のツールを増やしていきましょう！</p>
+    </div>
+    <div class='slide-footer'>4 / 5</div>
+</div>
+
+<!-- Slide 5: Final Message -->
+<div class='slide-container'>
+    <div class='slide-content final-slide-content'>
+        <h1>ご清聴ありがとうございました</h1>
+        <p style='font-size: 1.2rem; margin-top: 2em;'>データから新たな洞察を得る旅は、まだ始まったばかりです。<br>今日学んだ主成分分析を武器に、ぜひ次の分析に挑戦してください！</p>
+    </div>
+    <div class='slide-footer' style='color: #eee;'>5 / 5</div>
+</div>
+</body>
+</html>

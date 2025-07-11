@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>第3章：実践編</title>
+    <script src='https://cdn.jsdelivr.net/npm/chart.js'></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Roboto:wght@400;700;900&family=Fira+Code&display=swap');
+        :root {
+            --primary-color: #0d47a1;
+            --secondary-color: #1976d2;
+            --accent-color: #ff6f00;
+            --text-color: #333;
+            --bg-color: #f5f7fa;
+            --slide-bg: #ffffff;
+            --header-font: 'Roboto', 'Noto Sans JP', sans-serif;
+            --body-font: 'Noto Sans JP', sans-serif;
+            --code-font: 'Fira Code', monospace;
+        }
+        body {
+            font-family: var(--body-font);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 2em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .slide-container {
+            width: 100%;
+            max-width: 960px;
+            aspect-ratio: 16 / 9;
+            background: var(--slide-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 2em;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+        .slide-header {
+            padding: 0.5em 1.5em;
+            background-color: var(--primary-color);
+            color: white;
+            font-family: var(--header-font);
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+        .slide-content {
+            flex-grow: 1;
+            padding: 1.5em 2.5em;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .slide-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 0.5em 1.5em;
+            font-size: 0.8rem;
+            color: #777;
+            text-align: right;
+        }
+        h1, h2, h3 {
+            font-family: var(--header-font);
+            font-weight: 900;
+            color: var(--primary-color);
+            margin: 0;
+        }
+        h1 { font-size: 3rem; text-align: center; }
+        h2 { font-size: 2rem; }
+        p { font-size: 1rem; line-height: 1.7; }
+        .subtitle { color: var(--secondary-color); font-size: 1.5rem; font-weight: 400; margin-top: 0.5em; text-align: center; }
+        .flex-container { display: flex; justify-content: space-around; align-items: stretch; width: 100%; gap: 1.5em; }
+        .flex-item { flex: 1; }
+        .highlight { color: var(--accent-color); font-weight: bold; }
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 1em;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: var(--code-font);
+            font-size: 0.85rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        code { font-family: var(--code-font); }
+        .step-box {
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 1em;
+            width: 100%;
+            text-align: center;
+            background: #e3f2fd;
+        }
+        .arrow { font-size: 2rem; color: var(--accent-color); font-weight: 900; align-self: center; }
+    </style>
+</head>
+<body>
+
+    <!-- Slide 1: Chapter Title -->
+    <div class='slide-container'>
+        <div class='slide-content'>
+            <p class='subtitle'>第3章 実践編</p>
+            <h1>Pythonで手を動かしてみよう</h1>
+            <p class='subtitle'>scikit-learnを使って、理論をカタチにする</p>
+        </div>
+        <div class='slide-footer'>1 / 8</div>
+    </div>
+
+    <!-- Slide 2: Workflow -->
+    <div class='slide-container'>
+        <div class='slide-header'>3. 実践編</div>
+        <div class='slide-content'>
+            <h2 style='width: 100%; text-align:center; margin-bottom: 2em;'>分析の3ステップ</h2>
+            <div class='flex-container'>
+                <div class='step-box'>
+                    <h3>Step 1</h3>
+                    <p><strong>データの準備と<br>前処理</strong></p>
+                </div>
+                <div class='arrow'>→</div>
+                <div class='step-box' style='border-color:var(--accent-color); background: #fff3e0;'>
+                    <h3>Step 2</h3>
+                    <p><strong>主成分分析の<br>実行</strong></p>
+                </div>
+                <div class='arrow'>→</div>
+                <div class='step-box' style='border-color:var(--secondary-color); background: #e8eaf6;'>
+                    <h3>Step 3</h3>
+                    <p><strong>結果の解釈と<br>可視化</strong></p>
+                </div>
+            </div>
+            <p style='margin-top: 2em; text-align:center;'>今回は架空の「顧客満足度アンケートデータ」を使います。</p>
+        </div>
+        <div class='slide-footer'>2 / 8</div>
+    </div>
+
+    <!-- Slide 3: Step 1 - Standardization -->
+    <div class='slide-container'>
+        <div class='slide-header'>3. 実践編 - Step 1: データの準備と前処理</div>
+        <div class='slide-content'>
+            <h2 style='width:100%; text-align:center; margin-bottom: 1em;'>なぜ「標準化」が必要か？</h2>
+            <div class='flex-container'>
+                <div class='flex-item'>
+                    <p>変数ごとに<strong class='highlight'>単位やスケールが違う</strong>と...？</p>
+                    <p>例: 「満足度 (1-5点)」 vs 「年間購入額 (万円)」</p>
+                    <p>単純に分散を計算すると、<strong class='highlight'>値の大きい「購入額」のばらつきに分析が引っ張られてしまいます。</strong></p>
+                </div>
+                <div class='flex-item'>
+                    <svg viewBox='0 0 200 120' width='100%'>
+                        <rect x='20' y='100' width='50' height='10' fill='#1976d2' />
+                        <text x='45' y='95' font-size='10' text-anchor='middle'>満足度</text>
+                        <rect x='100' y='20' width='50' height='90' fill='#ff6f00' />
+                        <text x='125' y='15' font-size='10' text-anchor='middle'>購入額</text>
+                        <text x='100' y='118' font-size='12' text-anchor='middle'>分散の大きさ</text>
+                    </svg>
+                </div>
+            </div>
+            <p style='margin-top:1em; font-weight:bold; color:var(--primary-color); text-align:center;'>
+            標準化（平均 0, 分散 1 に揃える）で、全変数を「同じ土俵」に乗せることが不可欠！
+            </p>
+        </div>
+        <div class='slide-footer'>3 / 8</div>
+    </div>
+
+    <!-- Slide 4: Step 2 - Code -->
+    <div class='slide-container'>
+        <div class='slide-header'>3. 実践編 - Step 2: 主成分分析の実行</div>
+        <div class='slide-content' style='padding: 1.5em 1em;'>
+            <h2 style='width:100%; text-align:center; margin-bottom: 0.5em;'>scikit-learnで実装</h2>
+            <pre><code><span style='color:#6a9955'># 1. ライブラリのインポート</span>
+<span style='color:#569cd6'>import</span> pandas <span style='color:#569cd6'>as</span> pd
+<span style='color:#569cd6'>from</span> sklearn.preprocessing <span style='color:#569cd6'>import</span> StandardScaler
+<span style='color:#569cd6'>from</span> sklearn.decomposition <span style='color:#569cd6'>import</span> PCA
+
+<span style='color:#6a9955'># 2. データの読み込み (例)</span>
+df = pd.read_csv(<span style='color:#d69d85'>'customer_satisfaction.csv'</span>)
+X = df.drop(<span style='color:#d69d85'>'customer_id'</span>, axis=1)
+
+<span style='color:#6a9955'># 3. データの標準化</span>
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+<span style='color:#6a9955'># 4. PCAの実行 (主成分を2つに削減)</span>
+pca = PCA(n_components=2)
+X_pca = pca.fit_transform(X_scaled)
+
+<span style='color:#6a9955'># 5. 結果をDataFrameに変換</span>
+pca_df = pd.DataFrame(X_pca, columns=[<span style='color:#d69d85'>'PC1'</span>, <span style='color:#d69d85'>'PC2'</span>])</code></pre>
+        </div>
+        <div class='slide-footer'>4 / 8</div>
+    </div>
+
+    <!-- Slide 5: Step 3 - Contribution Ratio -->
+    <div class='slide-container'>
+        <div class='slide-header'>3. 実践編 - Step 3: 結果の解釈</div>
+        <div class='slide-content'>
+            <h2 style='width:100%; text-align:center; margin-bottom: 1em;'>① 寄与率・累積寄与率</h2>
+            <div class='flex-container'>
+                <div class='flex-item'>
+                    <p><strong class='highlight'>寄与率:</strong> 各主成分が、元の情報量（全分散）のうち何%を説明できているか。</p>
+                    <p><strong class='highlight'>累積寄与率:</strong> 主成分を足し上げた時に、合計で何%を説明できているか。</p>
+                    <p style='font-size:0.9rem'>一般的に、<strong style='color:var(--primary-color)'>累積寄与率が70%〜80%</strong>になるまでの主成分を採用します。</p>
+                </div>
+                <div class='flex-item' style='position:relative; height: 250px;'>
+                    <canvas id='contributionChart'></canvas>
+                </div>
+            </div>
+        </div>
+        <div class='slide-footer'>5 / 8</div>
+    </div>
+    
+    <!-- Slide 6: Step 3 - Loadings -->
+    <div class='slide-container'>
+        <div class='slide-header'>3. 実践編 - Step 3: 結果の解釈</div>
+        <div class='slide-content'>
+            <h2 style='width:100%; text-align:center; margin-bottom: 1em;'>② 主成分負荷量：主成分に「名前」をつける</h2>
+            <div class='flex-container'>
+                <div class='flex-item'>
+                    <p>各主成分と元の変数の<strong class='highlight'>相関の強さ</strong>を表します。</p>
+                    <p>この値を見ることで、各主成分が<strong class='highlight'>「どんな意味を持つ軸なのか」</strong>を解釈できます。</p>
+                    <p style='margin-top: 1em; background: #e3f2fd; padding: 0.5em; border-radius: 4px;'>
+                        <strong>例：PC1の解釈</strong><br>
+                        「価格満足度」「品質満足度」「店舗の綺麗さ」の負荷量が大きい<br>
+                        → <strong style='color: var(--primary-color)'>PC1は「総合的な満足度」軸</strong>と名付けよう！
+                    </p>
+                </div>
+                <div class='flex-item'>
+                    <img src="https://i.imgur.com/G4xHjJp.png" alt="主成分負荷量のヒートマップ例" style="width:100%; border: 1px solid #ccc;"/>
+                    <p style='font-size:0.8rem; text-align:center;'>主成分負荷量のヒートマップ（例）</p>
+                </div>
+            </div>
+        </div>
+        <div class='slide-footer'>6 / 8</div>
+    </div>
+    
+    <!-- Slide 7: Step 3 - Scores -->
+    <div class='slide-container'>
+        <div class='slide-header'>3. 実践編 - Step 3: 結果の解釈</div>
+        <div class='slide-content'>
+            <h2 style='width:100%; text-align:center; margin-bottom: 1em;'>③ 主成分スコア：サンプルを新しい軸で評価</h2>
+             <div class='flex-container'>
+                <div class='flex-item'>
+                    <p>各サンプル（顧客など）を、新しく作った主成分の軸でプロットしたもの。</p>
+                    <p>これにより、<strong class='highlight'>サンプル同士の関係性</strong>や<strong class='highlight'>グループ（クラスター）</strong>を視覚的に捉えることができます。</p>
+                </div>
+                <div class='flex-item' style='position:relative; height: 250px;'>
+                    <canvas id='scoreChart'></canvas>
+                </div>
+            </div>
+        </div>
+        <div class='slide-footer'>7 / 8</div>
+    </div>
+
+    <!-- Slide 8: Summary -->
+    <div class='slide-container'>
+        <div class='slide-header'>3. 実践編</div>
+        <div class='slide-content'>
+            <h2 style='text-align:center;'>第3章のまとめ</h2>
+            <ul style='font-size: 1.1rem; line-height: 1.8; list-style: none; padding-left: 0;'>
+                <li style='margin-bottom: 0.8em;'>✅ <strong>Step 1: 前処理</strong> - 単位の違う変数を扱うため<strong class='highlight'>「標準化」</strong>は必須。</li>
+                <li style='margin-bottom: 0.8em;'>✅ <strong>Step 2: 実行</strong> - `scikit-learn`の`StandardScaler`と`PCA`で簡単に実装できる。</li>
+                <li style='margin-bottom: 0.8em;'>✅ <strong>Step 3: 解釈</strong> - 重要なのは3つの指標。
+                    <ul style='list-style-type: '- '; padding-left: 2em; margin-top:0.5em;'>
+                        <li><strong style='color:var(--primary-color);'>寄与率</strong>: どの主成分をいくつ使うかを決める。</li>
+                        <li><strong style='color:var(--primary-color);'>主成分負荷量</strong>: 主成分に意味（名前）を与える。</li>
+                        <li><strong style='color:var(--primary-color);'>主成分スコア</strong>: サンプルを新しい軸でプロットし、分類や可視化を行う。</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class='slide-footer'>8 / 8</div>
+    </div>
+
+<script>
+// Chart for Contribution Ratio
+const ctx1 = document.getElementById('contributionChart').getContext('2d');
+new Chart(ctx1, {
+    type: 'bar',
+    data: {
+        labels: ['PC1', 'PC2', 'PC3', 'PC4', 'PC5', 'PC6'],
+        datasets: [{
+            label: '寄与率',
+            data: [45, 25, 12, 8, 6, 4],
+            backgroundColor: 'rgba(25, 118, 210, 0.6)',
+            borderColor: 'rgba(25, 118, 210, 1)',
+            borderWidth: 1,
+            yAxisID: 'y'
+        }, {
+            label: '累積寄与率',
+            data: [45, 70, 82, 90, 96, 100],
+            type: 'line',
+            borderColor: 'rgba(255, 111, 0, 1)',
+            backgroundColor: 'rgba(255, 111, 0, 0.2)',
+            fill: false,
+            yAxisID: 'y1'
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            y: {
+                beginAtZero: true,
+                title: { display: true, text: '寄与率 (%)' }
+            },
+            y1: {
+                type: 'linear',
+                display: true,
+                position: 'right',
+                beginAtZero: true,
+                max: 100,
+                grid: { drawOnChartArea: false },
+                title: { display: true, text: '累積寄与率 (%)' }
+            }
+        },
+        plugins: {
+            tooltip: { mode: 'index', intersect: false }
+        }
+    }
+});
+
+// Chart for Score Plot
+const ctx2 = document.getElementById('scoreChart').getContext('2d');
+new Chart(ctx2, {
+    type: 'scatter',
+    data: {
+        datasets: [{
+            label: '優良顧客層',
+            data: [{x: 2, y: 1.5}, {x: 2.5, y: 1.8}, {x: 1.8, y: 2.2}],
+            backgroundColor: 'rgba(255, 111, 0, 0.8)'
+        }, {
+            label: '価格重視層',
+            data: [{x: -2, y: -1}, {x: -2.5, y: -0.5}, {x: -1.8, y: -1.2}],
+            backgroundColor: 'rgba(13, 71, 161, 0.8)'
+        }, {
+            label: 'その他',
+            data: [{x: 0.5, y: -0.8}, {x: -0.5, y: 1}, {x: 1, y: -1}, {x: -1, y: 0.2}],
+            backgroundColor: 'rgba(158, 158, 158, 0.8)'
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: {
+                title: { display: true, text: 'PC1: 総合満足度 →' }
+            },
+            y: {
+                title: { display: true, text: 'PC2: ← サポート重視' }
+            }
+        }
+    }
+});
+</script>
+</body>
+</html>

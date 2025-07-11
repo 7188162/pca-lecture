@@ -1,0 +1,484 @@
+<html lang='ja'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>特設サイト | これならわかる主成分分析</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Roboto:wght@400;700;900&display=swap');
+
+:root {
+        --primary-color: #0d47a1;
+        --secondary-color: #1976d2;
+        --accent-color: #ff6f00;
+        --text-color: #333;
+        --light-text-color: #f5f7fa;
+        --bg-color: #f5f7fa;
+        --card-bg: #ffffff;
+        --header-font: 'Roboto', 'Noto Sans JP', sans-serif;
+        --body-font: 'Noto Sans JP', sans-serif;
+    }
+
+    /* --- Basic Reset --- */
+    *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: var(--body-font);
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.7;
+    }
+
+    a {
+        color: var(--secondary-color);
+        text-decoration: none;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+    
+    img, svg {
+        max-width: 100%;
+        display: block;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+    
+    /* --- Header --- */
+    .site-header {
+        background-color: var(--card-bg);
+        padding: 1rem 0;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    
+    .site-header .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .site-title {
+        font-family: var(--header-font);
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+    
+    .site-nav ul {
+        display: flex;
+        list-style: none;
+        gap: 1.5rem;
+    }
+m    
+    .site-nav a {
+        font-weight: 700;
+        font-size: 1rem;
+    }
+
+    /* --- Hero Section --- */
+    .hero {
+        background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+        color: var(--light-text-color);
+        text-align: center;
+        padding: 6rem 0;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.5rem;
+        font-weight: 400;
+        opacity: 0.9;
+    }
+    
+    .hero-title {
+        font-family: var(--header-font);
+        font-size: 3.5rem;
+        font-weight: 900;
+        margin: 0.2em 0 0.5em;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    .hero-description {
+        font-size: 1.2rem;
+        max-width: 600px;
+        margin: 0 auto 2rem;
+        opacity: 0.95;
+    }
+
+    .cta-button {
+        display: inline-block;
+        background-color: var(--accent-color);
+        color: var(--light-text-color);
+        padding: 0.8em 2em;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .cta-button:hover {
+        background-color: #e65100;
+        text-decoration: none;
+        transform: translateY(-3px);
+    }
+
+    /* --- Section Styles --- */
+    .section {
+        padding: 4rem 0;
+    }
+
+    .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: 900;
+        color: var(--primary-color);
+        margin-bottom: 3rem;
+        position: relative;
+    }
+
+    .section-title::after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 4px;
+        background-color: var(--accent-color);
+        margin: 0.5rem auto 0;
+        border-radius: 2px;
+    }
+
+    /* --- About Section --- */
+    #about .about-content {
+        display: flex;
+        gap: 3rem;
+        align-items: center;
+    }
+
+    .about-text {
+        flex: 2;
+    }
+    
+    .about-text h3 {
+        font-size: 1.5rem;
+        color: var(--secondary-color);
+        margin-bottom: 1rem;
+    }
+    
+    .about-visual {
+        flex: 1;
+        text-align: center;
+    }
+    .about-visual svg {
+        width: 200px;
+        height: auto;
+    }
+
+    /* --- Slides Section --- */
+    #slides .slides-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .slide-card {
+        background-color: var(--card-bg);
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+    }
+    .slide-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        text-decoration: none;
+    }
+    
+    .card-header {
+        background-color: var(--primary-color);
+        color: var(--light-text-color);
+        padding: 1rem 1.5rem;
+        font-size: 1.2rem;
+        font-weight: 700;
+    }
+    
+    .card-body {
+        padding: 1.5rem;
+        flex-grow: 1;
+    }
+    
+    .card-body h3 {
+        font-size: 1.3rem;
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+    }
+    
+    .card-body p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+    
+    .card-footer {
+        padding: 1rem 1.5rem;
+        text-align: right;
+        font-weight: 700;
+        color: var(--accent-color);
+    }
+    .card-footer::after {
+        content: ' →';
+    }
+
+    /* --- Materials Section --- */
+    .materials-list {
+        list-style: none;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    .materials-list li {
+        background-color: var(--card-bg);
+        margin-bottom: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        transition: transform 0.2s ease;
+    }
+    .materials-list li:hover {
+        transform: scale(1.02);
+    }
+
+    .material-item {
+        display: flex;
+        align-items: center;
+        padding: 1rem 1.5rem;
+    }
+    
+    .material-icon {
+        margin-right: 1.5rem;
+        width: 40px;
+        height: 40px;
+        flex-shrink: 0;
+    }
+    
+    .material-info h3 {
+        font-size: 1.2rem;
+        color: var(--primary-color);
+    }
+    .material-info p {
+        font-size: 0.9rem;
+        color: #666;
+    }
+    
+    .material-download {
+        margin-left: auto;
+        background-color: var(--secondary-color);
+        color: var(--light-text-color);
+        padding: 0.5em 1.2em;
+        border-radius: 5px;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+    .material-download:hover {
+        background-color: var(--primary-color);
+        text-decoration: none;
+    }
+
+    /* --- Footer --- */
+    .site-footer {
+        background-color: #333;
+        color: #ccc;
+        text-align: center;
+        padding: 2rem 0;
+        margin-top: 4rem;
+    }
+    
+    /* --- Responsive --- */
+    @media (max-width: 768px) {
+        .site-nav {
+            display: none; /* Simple responsive: hide nav on small screens */
+        }
+        .hero-title {
+            font-size: 2.5rem;
+        }
+        .hero-subtitle {
+            font-size: 1.2rem;
+        }
+        #about .about-content {
+            flex-direction: column;
+        }
+    }
+
+</style>
+
+</head>
+<body>
+
+
+<header class='site-header'>
+    <div class='container'>
+        <a href='#' class='site-title'>これならわかる主成分分析</a>
+        <nav class='site-nav'>
+            <ul>
+                <li><a href='#about'>講義概要</a></li>
+                <li><a href='#slides'>スライド</a></li>
+                <li><a href='#materials'>演習データ</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class='hero'>
+        <div class='container'>
+            <p class='hero-subtitle'>データに隠された“本質”を見抜く技術</p>
+            <h1 class='hero-title'>これならわかる<br>主成分分析</h1>
+            <p class='hero-description'>
+                多くの変数を、少数の「本質的な軸」に要約する。
+                理論の「なぜ？」からPythonによる実装、ビジネスでの活用事例まで、
+                一気通貫で学べる講義資料を公開します。
+            </p>
+            <a href='#slides' class='cta-button'>今すぐ学習を始める</a>
+        </div>
+    </section>
+
+    <section id='about' class='section'>
+        <div class='container'>
+            <h2 class='section-title'>この講義について</h2>
+            <div class='about-content'>
+                <div class='about-text'>
+                    <h3>なぜ主成分分析を学ぶのか？</h3>
+                    <p>データ駆動型の意思決定が重要視される現代、多くの変数を持つ複雑なデータを扱う場面が増えています。主成分分析（PCA）は、その複雑なデータから重要な情報（エッセンス）を抽出し、次元削減や可視化を行うための強力なツールです。</p>
+                    <h3>この講義で得られること</h3>
+                    <p>本講義は、大学で数学の基礎は学んだものの、実務での活用に自信を持てない方を対象としています。数式への深入りは避けつつも理論の「なぜ」を直感的に解説し、Pythonでの実装を通じて、あなたが自力で主成分分析を実行し、結果を適切に解釈・活用できるようになることを目指します。</p>
+                </div>
+                <div class='about-visual'>
+                    <svg viewBox='-10 -10 120 120'>
+                        <defs>
+                            <filter id='glow'><feGaussianBlur stdDeviation='2.5' result='coloredBlur'/><feMerge><feMergeNode in='coloredBlur'/><feMergeNode in='SourceGraphic'/></feMerge></filter>
+                        </defs>
+                        <path d='M50 0 L100 25 L100 75 L50 100 L0 75 L0 25 Z' fill='#ff6f00' filter='url(#glow)'/>
+                        <text x='50' y='55' font-size='20' font-weight='900' fill='white' text-anchor='middle' font-family='Roboto'>PCA</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id='slides' class='section' style='background-color: #e3f2fd;'>
+        <div class='container'>
+            <h2 class='section-title'>講義スライド</h2>
+            <div class='slides-grid'>
+                
+                <a href='chapter1.html' target='_blank' class='slide-card'>
+                    <div class='card-header'>第1章</div>
+                    <div class='card-body'>
+                        <h3>イントロダクション</h3>
+                        <p>データ分析における「次元の呪い」とは？なぜ主成分分析が必要なのか、そのゴールを理解します。</p>
+                    </div>
+                    <div class='card-footer'>スライドを見る</div>
+                </a>
+
+                <a href='chapter2.html' target='_blank' class='slide-card'>
+                    <div class='card-header'>第2章</div>
+                    <div class='card-body'>
+                        <h3>理論編</h3>
+                        <p>数式を追うのではなく、図解で直感的にPCAの「キモ」を掴みます。分散、固有値とは何かをイメージで解説。</p>
+                    </div>
+                    <div class='card-footer'>スライドを見る</div>
+                </a>
+
+                <a href='chapter3.html' target='_blank' class='slide-card'>
+                    <div class='card-header'>第3章</div>
+                    <div class='card-body'>
+                        <h3>実践編</h3>
+                        <p>Python (scikit-learn) を使って実際に手を動かします。標準化から結果の解釈までステップバイステップで学びます。</p>
+                    </div>
+                    <div class='card-footer'>スライドを見る</div>
+                </a>
+                
+                <a href='chapter4.html' target='_blank' class='slide-card'>
+                    <div class='card-header'>第4章</div>
+                    <div class='card-body'>
+                        <h3>応用編</h3>
+                        <p>マーケティング、品質管理、ファイナンスなど、実際のビジネスシーンでどのように活用されているか事例を紹介します。</p>
+                    </div>
+                    <div class='card-footer'>スライドを見る</div>
+                </a>
+                
+                <a href='chapter5.html' target='_blank' class='slide-card'>
+                    <div class='card-header'>第5章</div>
+                    <div class='card-body'>
+                        <h3>まとめ</h3>
+                        <p>講義全体の要点を振り返り、PCAの限界と注意点、そして次の学習ステップについて解説します。</p>
+                    </div>
+                    <div class='card-footer'>スライドを見る</div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+    
+    <section id='materials' class='section'>
+        <div class='container'>
+            <h2 class='section-title'>演習用コンテンツ</h2>
+            <ul class='materials-list'>
+                <li>
+                    <a href='materials/exercise.pdf' download class='material-item'>
+                        <div class='material-icon'>
+                            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='#d32f2f'><path d='M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9.5 14.5v-1H11v.5h2v-1h.5v-1h-1v-.5h-2v1H9.5v.5zm4.5 0h-1v-4h1v4zM16 9h-2.5v1h-1v.5h-1V11h2v-1h1v-.5h.5V9zm-1.5-1.5c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6z'/></svg>
+                        </div>
+                        <div class='material-info'>
+                            <h3>演習問題 (.pdf)</h3>
+                            <p>講義内容を自身のPCで実践できる演習課題（2問）です。</p>
+                        </div>
+                        <span class='material-download'>ダウンロード</span>
+                    </a>
+                </li>
+                <li>
+                    <a href='materials/sample_data.csv' download class='material-item'>
+                        <div class='material-icon'>
+                           <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='#2e7d32'><path d='M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-1 9h-3v3h-2v-3h-3v-2h3V7h2v3h3v2z'/></svg>
+                        </div>
+                        <div class='material-info'>
+                            <h3>サンプルデータ (.csv)</h3>
+                            <p>演習で使用する架空の顧客満足度アンケートデータです。</p>
+                        </div>
+                        <span class='material-download'>ダウンロード</span>
+                    </a>
+                </li>
+                <li>
+                    <a href='materials/answer.ipynb' download class='material-item'>
+                        <div class='material-icon'>
+                           <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='#f57c00'><path d='M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 14h-8v-2h8v2zm0-4h-8v-2h8v2zm-3-5V3.5L18.5 9H13z'/></svg>
+                        </div>
+                        <div class='material-info'>
+                            <h3>解答サンプルコード (.ipynb)</h3>
+                            <p>解答・解説を付記したJupyter Notebookファイルです。</p>
+                        </div>
+                        <span class='material-download'>ダウンロード</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+</main>
+
+<footer class='site-footer'>
+    <div class='container'>
+        <p>© 2024 これならわかる主成分分析プロジェクト. All Rights Reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

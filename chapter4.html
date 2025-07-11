@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>第4章：応用編</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Roboto:wght@400;700;900&display=swap');
+:root {
+--primary-color: #0d47a1;
+--secondary-color: #1976d2;
+--accent-color: #ff6f00;
+--text-color: #333;
+--bg-color: #f5f7fa;
+--slide-bg: #ffffff;
+--header-font: 'Roboto', 'Noto Sans JP', sans-serif;
+--body-font: 'Noto Sans JP', sans-serif;
+}
+body {
+font-family: var(--body-font);
+background-color: var(--bg-color);
+color: var(--text-color);
+margin: 0;
+padding: 2em;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+.slide-container {
+width: 100%;
+max-width: 960px;
+aspect-ratio: 16 / 9;
+background: var(--slide-bg);
+border-radius: 8px;
+box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+margin-bottom: 2em;
+display: flex;
+flex-direction: column;
+position: relative;
+overflow: hidden;
+}
+.slide-header {
+padding: 0.5em 1.5em;
+background-color: var(--primary-color);
+color: white;
+font-family: var(--header-font);
+font-weight: 700;
+font-size: 1.2rem;
+text-align: center;
+}
+.slide-content {
+flex-grow: 1;
+padding: 2em 3em;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+.slide-footer {
+position: absolute;
+bottom: 0;
+left: 0;
+right: 0;
+padding: 0.5em 1.5em;
+font-size: 0.8rem;
+color: #777;
+text-align: right;
+}
+h1, h2, h3 {
+font-family: var(--header-font);
+font-weight: 900;
+color: var(--primary-color);
+margin: 0;
+}
+h1 { font-size: 3rem; text-align: center; }
+h2 { font-size: 2.2rem; }
+h3 { font-size: 1.3rem; margin-bottom: 0.5em; color: var(--secondary-color); }
+p { font-size: 1.1rem; line-height: 1.8; }
+.subtitle { color: var(--secondary-color); font-size: 1.5rem; font-weight: 400; margin-top: 0.5em; text-align: center; }
+.flex-container { display: flex; justify-content: space-around; align-items: center; width: 100%; gap: 2em; }
+.flex-item { flex: 1; text-align: left; }
+.highlight { color: var(--accent-color); font-weight: bold; }
+.usecase-box {
+border: 1px solid #ddd;
+border-radius: 8px;
+padding: 1.5em;
+height: 100%;
+background-color: #f9f9f9;
+}
+</style>
+</head>
+<body>
+<!-- Slide 1: Chapter Title -->
+<div class='slide-container'>
+    <div class='slide-content'>
+        <p class='subtitle'>第4章 応用編</p>
+        <h1>ビジネスでの活用事例</h1>
+        <p class='subtitle'>PCAはこう使われる！</p>
+    </div>
+    <div class='slide-footer'>1 / 5</div>
+</div>
+
+<!-- Slide 2: Marketing Use Case -->
+<div class='slide-container'>
+    <div class='slide-header'>4. 応用編 - ビジネスでの活用事例</div>
+    <div class='slide-content'>
+        <h2 style='width:100%; text-align:center; margin-bottom: 1em;'>① マーケティング：顧客の“本音”を可視化する</h2>
+        <div class='flex-container' style='align-items: stretch;'>
+            <div class='flex-item usecase-box'>
+                <h3>顧客セグメンテーション</h3>
+                <p style='font-size: 1rem;'>多数のアンケート項目から「総合満足度軸」「価格重視軸」などを抽出し、顧客をタイプ分けする。</p>
+                <svg viewBox='-5 -5 110 110' width='90%' style='display: block; margin: 0 auto;'>
+                    <line x1='0' y1='50' x2='100' y2='50' stroke='#999' stroke-width='0.5'/>
+                    <line x1='50' y1='0' x2='50' y2='100' stroke='#999' stroke-width='0.5'/>
+                    <circle cx='80' cy='20' r='4' fill='#ff6f00' /><text x='82' y='18' font-size='8'>A層</text>
+                    <circle cx='75' cy='28' r='4' fill='#ff6f00' />
+                    <circle cx='20' cy='80' r='4' fill='#0d47a1' /><text x='15' y='85' font-size='8'>B層</text>
+                    <circle cx='25' cy='72' r='4' fill='#0d47a1' />
+                    <text x='102' y='53' text-anchor='start' font-size='8'>総合満足度</text>
+                    <text x='47' y='-2' text-anchor='end' font-size='8'>価格重視</text>
+                </svg>
+            </div>
+            <div class='flex-item usecase-box'>
+                <h3>ポジショニングマップ</h3>
+                <p style='font-size: 1rem;'>製品評価データから「高級感軸」「機能性軸」などを作り、競合との立ち位置を明確にする。</p>
+                <svg viewBox='-5 -5 110 110' width='90%' style='display: block; margin: 0 auto;'>
+                    <line x1='0' y1='50' x2='100' y2='50' stroke='#999' stroke-width='0.5'/>
+                    <line x1='50' y1='0' x2='50' y2='100' stroke='#999' stroke-width='0.5'/>
+                    <circle cx='80' cy='20' r='5' fill='#d32f2f' /><text x='80' y='15' font-size='8' text-anchor='middle'>自社製品</text>
+                    <circle cx='30' cy='30' r='4' fill='#757575' /><text x='30' y='40' font-size='8' text-anchor='middle'>A社</text>
+                    <circle cx='70' cy='70' r='4' fill='#757575' /><text x='70' y='80' font-size='8' text-anchor='middle'>B社</text>
+                    <text x='102' y='53' text-anchor='start' font-size='8'>高級感</text>
+                    <text x='47' y='-2' text-anchor='end' font-size='8'>機能性</text>
+                </svg>
+            </div>
+        </div>
+    </div>
+    <div class='slide-footer'>2 / 5</div>
+</div>
+
+<!-- Slide 3: Quality Control Use Case -->
+<div class='slide-container'>
+    <div class='slide-header'>4. 応用編 - ビジネスでの活用事例</div>
+    <div class='slide-content'>
+        <h2 style='width:100%; text-align:center; margin-bottom: 1em;'>② 品質管理：“いつもと違う”を検知する</h2>
+        <div class='flex-container'>
+            <div class='flex-item' style='flex: 1.2;'>
+                <p>工場のセンサーデータ（温度、圧力、振動など多数）から製品の<strong class='highlight'>「正常な状態」</strong>を主成分でモデル化。</p>
+                <p>新しいデータが、その「正常な範囲」から大きく外れた場合に<strong class='highlight'>「異常」として検知</strong>します。</p>
+                <p style='font-size: 1rem; color: var(--primary-color);'><strong>「ベテランの勘」</strong>をデータで再現する試みです。</p>
+            </div>
+            <div class='flex-item'>
+                <svg viewBox='0 0 150 100' width='100%'>
+                    <!-- Normal Cluster -->
+                    <ellipse cx='60' cy='50' rx='40' ry='20' fill='rgba(25, 118, 210, 0.2)' stroke='rgba(25, 118, 210, 0.5)'/>
+                    <text x='60' y='55' font-size='10' text-anchor='middle' fill='#0d47a1'>正常範囲</text>
+                    <!-- Normal Points -->
+                    <circle cx='50' cy='50' r='2' fill='#1976d2'/>
+                    <circle cx='70' cy='45' r='2' fill='#1976d2'/>
+                    <circle cx='80' cy='55' r='2' fill='#1976d2'/>
+                    <circle cx='40' cy='52' r='2' fill='#1976d2'/>
+                    <!-- Anomaly Point -->
+                    <circle cx='130' cy='20' r='3' fill='#d32f2f'>
+                        <animate attributeName='r' from='3' to='5' dur='1s' repeatCount='indefinite' />
+                    </circle>
+                    <text x='130' y='15' font-size='10' text-anchor='middle' fill='#d32f2f'>異常検知！</text>
+                    <line x1='98' y1='43' x2='127' y2='22' stroke='#d32f2f' stroke-width='1' stroke-dasharray='3 3'/>
+                </svg>
+            </div>
+        </div>
+    </div>
+    <div class='slide-footer'>3 / 5</div>
+</div>
+
+<!-- Slide 4: Finance Use Case -->
+<div class='slide-container'>
+    <div class='slide-header'>4. 応用編 - ビジネスでの活用事例</div>
+    <div class='slide-content'>
+        <h2 style='width:100%; text-align:center; margin-bottom: 1em;'>③ ファイナンス：市場の“大きなうねり”を捉える</h2>
+        <div class='flex-container'>
+            <div class='flex-item' style='flex: 1.2;'>
+                <p>数百〜数千の<strong class='highlight'>個別株価の変動</strong>は複雑で捉えにくい。</p>
+                <p>PCAを使い、多くの株価に共通する動き（<strong class='highlight'>第1主成分</strong>）を抽出することで、<strong class='highlight'>「市場全体のトレンド（マーケット因子）」</strong>として把握することができます。</p>
+            </div>
+            <div class='flex-item'>
+                <svg viewBox='0 0 150 100' width='100%'>
+                    <!-- Individual stocks (thin lines) -->
+                    <path d='M 10 50 C 30 20, 40 80, 70 50 S 90 20, 110 50 S 130 80, 140 50' stroke='#90a4ae' stroke-width='0.5' fill='none' opacity='0.7' />
+                    <path d='M 10 60 C 25 90, 45 30, 65 60 S 85 90, 105 60 S 125 30, 140 60' stroke='#90a4ae' stroke-width='0.5' fill='none' opacity='0.7' />
+                    <text x='10' y='15' font-size='10' fill='#777'>個別株の動き</text>
+                    <!-- Market Trend (thick line) -->
+                    <path d='M 10 55 C 30 40, 45 60, 70 55 S 90 40, 110 55 S 130 60, 140 55' stroke='var(--accent-color)' stroke-width='3' fill='none' >
+                         <animate attributeName='stroke-dasharray' from='0, 300' to='300, 0' dur='2s' fill='freeze' />
+                    </path>
+                    <text x='110' y='35' font-size='12' fill='var(--accent-color)' font-weight='bold'>市場トレンド(PC1)</text>
+                </svg>
+            </div>
+        </div>
+    </div>
+    <div class='slide-footer'>4 / 5</div>
+</div>
+
+<!-- Slide 5: Summary -->
+<div class='slide-container'>
+    <div class='slide-header'>4. 応用編 - ビジネスでの活用事例</div>
+    <div class='slide-content'>
+        <h2 style='text-align:center;'>第4章のまとめ</h2>
+        <p style='text-align:center; margin-bottom: 2em;'>PCAは、多様な分野で「多すぎる情報から本質を見抜く」ための強力な武器になります。</p>
+        <div class='flex-container' style='align-items: stretch; font-size: 0.9rem; text-align: center;'>
+            <div class='flex-item usecase-box' style='background-color: #e3f2fd;'>
+                <h3 style='color: var(--primary-color);'>マーケティング</h3>
+                <p>顧客セグメンテーション<br>ポジショニング分析</p>
+                <p style='font-weight: bold; color: var(--primary-color);'>→ 顧客理解・戦略立案</p>
+            </div>
+            <div class='flex-item usecase-box' style='background-color: #e8f5e9;'>
+                <h3 style='color: #2e7d32;'>品質管理</h3>
+                <p>多数のセンサーデータ監視<br>正常・異常の判別</p>
+                <p style='font-weight: bold; color: #2e7d32;'>→ 異常検知・予防保全</p>
+            </div>
+            <div class='flex-item usecase-box' style='background-color: #fff3e0;'>
+                <h3 style='color: var(--accent-color);'>ファイナンス</h3>
+                <p>多数の株価変動の要約<br>市場トレンドの抽出</p>
+                <p style='font-weight: bold; color: var(--accent-color);'>→ リスク管理・ポートフォリオ構築</p>
+            </div>
+        </div>
+    </div>
+    <div class='slide-footer'>5 / 5</div>
+</div>
+</body>
+</html>
